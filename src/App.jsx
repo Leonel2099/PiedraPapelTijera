@@ -1,18 +1,24 @@
 import { Canvas } from "@react-three/fiber";
-import { Sky } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Sky } from "@react-three/drei";
+import { Scene } from "./assets/components/Scene";
+import { Main } from "./assets/components/Main";
 import { Physics } from "@react-three/cannon";
-import { Ground } from "./assets/components/Ground";
-
+import { useState } from "react";
 
 function App() {
+  const [play, setPlay] = useState(false)
+
   return (
     <>
       <Canvas>
-        <Sky sunPosition={[100, 100, 100]} />   
-        <ambientLight intensity={0.5} />         
+        <Sky sunPosition={[100, 100, 100]} />
+        <ambientLight intensity={1} />
+        <pointLight position={[0.5, 20, 10]} intensity={250}></pointLight>
+        {/* <OrbitControls></OrbitControls> */}
         <Physics>
-          <Ground></Ground>
-        </Physics>   
+          <Main setPlay={setPlay} ></Main>
+        </Physics>
+          <Scene playAnimation={play}></Scene>
       </Canvas>
     </>
   )
